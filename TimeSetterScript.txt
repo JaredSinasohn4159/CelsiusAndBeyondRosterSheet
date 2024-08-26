@@ -1,0 +1,34 @@
+function onEdit(e) {
+  // Check if the edited cell is in column C (column index 3)
+  var editedCell = e.range;
+  var sheet = e.source.getActiveSheet();
+  
+  if (editedCell.getColumn() == 3) {
+    // Check if the cell value is "Picked up"
+    if (editedCell.getValue() == "Picked up") {
+      // Get the timestamp cell, for example, column D of the same row
+      var timestampCell = sheet.getRange(editedCell.getRow(), 5);
+      
+      // Check if the timestamp cell is empty
+      if (timestampCell.getValue() === '') {
+        timestampCell.setValue(new Date()).setNumberFormat("h:mm:ss am/pm");
+      }
+    }else{
+      var timestampCell = sheet.getRange(editedCell.getRow(), 5);
+      timestampCell.setValue('');
+    }
+    if (editedCell.getValue() == "Dropped off") {
+      // Get the timestamp cell, for example, column D of the same row
+      var timestampCell = sheet.getRange(editedCell.getRow(), 4);
+      
+      // Check if the timestamp cell is empty
+      if (timestampCell.getValue() === '') {
+        timestampCell.setValue(new Date()).setNumberFormat("h:mm:ss am/pm");
+      }
+    }
+    if(editedCell.getValue()=="Absent"){
+      var timestampCell = sheet.getRange(editedCell.getRow(), 4);
+      timestampCell.setValue('');
+    }
+  }
+}
